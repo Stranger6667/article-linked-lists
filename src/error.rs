@@ -1,0 +1,39 @@
+use core::fmt;
+use std::error;
+
+/// Indicates invalid schema.
+#[derive(Debug)]
+pub struct SchemaError {
+    message: String,
+}
+
+impl fmt::Display for SchemaError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str(&self.message)
+    }
+}
+
+impl error::Error for SchemaError {}
+
+/// Error that may happen during input validation.
+#[derive(Debug)]
+pub struct ValidationError {
+    message: String,
+}
+
+impl ValidationError {
+    /// Create new validation error.
+    pub fn new(message: impl Into<String>) -> Self {
+        Self {
+            message: message.into(),
+        }
+    }
+}
+
+impl fmt::Display for ValidationError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str(&self.message)
+    }
+}
+
+impl error::Error for ValidationError {}

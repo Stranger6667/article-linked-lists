@@ -1,0 +1,169 @@
+{
+  "schema": {
+    "properties": {
+      "another": {
+        "type": "string"
+      },
+      "inner": {
+        "properties": {
+          "another": {
+            "type": "string"
+          },
+          "inner": {
+            "properties": {
+              "another": {
+                "type": "string"
+              },
+              "inner": {
+                "properties": {
+                  "another": {
+                    "type": "string"
+                  },
+                  "inner": {
+                    "properties": {
+                      "another": {
+                        "type": "string"
+                      },
+                      "inner": {
+                        "properties": {
+                          "another": {
+                            "type": "string"
+                          },
+                          "inner": {
+                            "properties": {
+                              "another": {
+                                "type": "string"
+                              },
+                              "inner": {
+                                "properties": {
+                                  "another": {
+                                    "type": "string"
+                                  },
+                                  "inner": {
+                                    "properties": {
+                                      "another": {
+                                        "type": "string"
+                                      },
+                                      "inner": {
+                                        "properties": {
+                                          "another": {
+                                            "type": "string"
+                                          },
+                                          "inner": {
+                                            "type": "integer"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "instances": [
+    {
+      "kind": "valid",
+      "name": "0 levels",
+      "value": {}
+    },
+    {
+      "kind": "invalid",
+      "name": "0 levels",
+      "value": {
+        "another": 1
+      }
+    },
+    {
+      "kind": "valid",
+      "name": "5 levels",
+      "value": {
+        "inner": {
+          "inner": {
+            "inner": {
+              "inner": {
+                "another": "hello"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "kind": "invalid",
+      "name": "5 levels",
+      "value": {
+        "inner": {
+          "inner": {
+            "inner": {
+              "inner": {
+                "another": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "kind": "valid",
+      "name": "10 levels",
+      "value": {
+        "inner": {
+          "inner": {
+            "inner": {
+              "inner": {
+                "inner": {
+                  "inner": {
+                    "inner": {
+                      "inner": {
+                        "inner": {
+                          "another": "hello"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "kind": "invalid",
+      "name": "10 levels",
+      "value": {
+        "inner": {
+          "inner": {
+            "inner": {
+              "inner": {
+                "inner": {
+                  "inner": {
+                    "inner": {
+                      "inner": {
+                        "inner": {
+                          "another": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 use serde_json::Value;
 
-use crate::ValidationError;
+use crate::{JsonPointerNode, ValidationError};
 
 pub(crate) mod properties;
 pub(crate) mod type_;
@@ -12,6 +12,6 @@ pub(crate) trait Node {
     fn validate<'a>(
         &self,
         instance: &'a Value,
-        path: &mut Vec<&'a str>,
+        path: JsonPointerNode<'a, '_>,
     ) -> Result<(), ValidationError>;
 }

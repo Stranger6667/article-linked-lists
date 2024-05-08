@@ -1,6 +1,6 @@
 use serde_json::Value;
 
-use crate::{Node, ValidationError};
+use crate::{JsonPointerNode, Node, ValidationError};
 
 pub(crate) struct Properties {
     properties: Vec<(String, Box<dyn Node>)>,
@@ -23,14 +23,12 @@ impl Node for Properties {
     fn validate<'a>(
         &self,
         instance: &'a Value,
-        path: &mut Vec<&'a str>,
+        path: JsonPointerNode<'a, '_>,
     ) -> Result<(), ValidationError> {
         if let Value::Object(object) = instance {
             for (key, value) in &self.properties {
                 if let Some((key, instance)) = object.get_key_value(key) {
-                    path.push(key);
-                    value.validate(instance, path)?;
-                    path.pop();
+                    value.validate(instance, path.push(key.as_str()))?;
                 }
             }
         }

@@ -30,10 +30,12 @@
 
 use core::fmt;
 
+pub(crate) use paths::JsonPointerNode;
 use serde_json::Value;
 
 mod error;
 mod keywords;
+mod paths;
 
 pub use error::{SchemaError, ValidationError};
 use keywords::{Node, Properties, Type};
@@ -116,7 +118,7 @@ impl Validator {
     ///
     /// Returns `ValidationError` if the input instance is not valid under the given validator.
     pub fn validate(&self, instance: &Value) -> Result<(), ValidationError> {
-        self.node.validate(instance, &mut Vec::new())
+        self.node.validate(instance, JsonPointerNode::new())
     }
 }
 

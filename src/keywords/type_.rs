@@ -2,7 +2,7 @@ use core::fmt;
 
 use serde_json::Value;
 
-use crate::ValidationError;
+use crate::{JsonPointerNode, ValidationError};
 
 use super::Node;
 
@@ -28,7 +28,7 @@ impl Node for Type {
     fn validate<'a>(
         &self,
         instance: &'a Value,
-        path: &mut Vec<&'a str>,
+        path: JsonPointerNode<'a, '_>,
     ) -> Result<(), ValidationError> {
         match (self, instance) {
             (Type::Array, Value::Array(_))
@@ -40,7 +40,7 @@ impl Node for Type {
             (Type::Integer, Value::Number(n)) if n.is_i64() || n.is_u64() => Ok(()),
             _ => Err(ValidationError::new(
                 format!("{instance} is not of type '{self}'"),
-                path.iter().copied(),
+                path.to_vec().into_iter(),
             )),
         }
     }

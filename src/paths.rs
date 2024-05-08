@@ -1,21 +1,22 @@
 /// A node in a linked list representing a JSON pointer.
 #[derive(Debug)]
 pub(crate) struct JsonPointerNode<'a, 'b> {
-    pub(crate) segment: Option<&'a str>,
+    pub(crate) segment: &'a str,
     pub(crate) parent: Option<&'b JsonPointerNode<'a, 'b>>,
 }
 impl<'a, 'b> JsonPointerNode<'a, 'b> {
     /// Create a root node of a JSON pointer.
     pub(crate) const fn new() -> Self {
         JsonPointerNode {
-            segment: None,
+            // The value does not matter, it will never be used
+            segment: "",
             parent: None,
         }
     }
     /// Push a new segment to the JSON pointer.
     pub(crate) fn push(&'a self, segment: &'a str) -> JsonPointerNode<'a, 'b> {
         JsonPointerNode {
-            segment: Some(segment),
+            segment,
             parent: Some(self),
         }
     }
@@ -31,13 +32,13 @@ impl<'a, 'b> JsonPointerNode<'a, 'b> {
         // Callect the segments from the head to the tail
         let mut buffer = Vec::with_capacity(capacity);
         let mut head = self;
-        if let Some(segment) = &head.segment {
-            buffer.push((*segment).to_string());
+        if head.parent.is_some() {
+            buffer.push(head.segment.to_string())
         }
         while let Some(next) = head.parent {
             head = next;
-            if let Some(segment) = &head.segment {
-                buffer.push((*segment).to_string());
+            if head.parent.is_some() {
+                buffer.push(head.segment.to_string());
             }
         }
         // Reverse the buffer to get the segments in the correct order

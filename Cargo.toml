@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-imbl = {version = "3", features = ["small-chunks"] }
 serde_json = "1.0"
 
 [dev-dependencies]

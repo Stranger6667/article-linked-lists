@@ -34,6 +34,7 @@ impl ValidationError {
         }
     }
     /// JSON Pointer to the location of the error.
+    #[must_use]
     pub fn location_pointer(&self) -> String {
         let mut pointer = String::new();
         for segment in &self.location {
@@ -48,7 +49,7 @@ impl fmt::Display for ValidationError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.write_str(&self.message)?;
         f.write_str(" at ")?;
-        for segment in self.location.iter() {
+        for segment in &self.location {
             f.write_str("/")?;
             f.write_str(segment)?;
         }

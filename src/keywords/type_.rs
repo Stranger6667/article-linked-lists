@@ -25,7 +25,7 @@ impl Type {
 }
 
 impl Node for Type {
-    fn validate(&self, instance: &Value) -> Result<(), ValidationError> {
+    fn validate(&self, instance: &Value, path: Vec<&str>) -> Result<(), ValidationError> {
         match (self, instance) {
             (Type::Array, Value::Array(_))
             | (Type::Null, Value::Null)
@@ -34,9 +34,10 @@ impl Node for Type {
             | (Type::Object, Value::Object(_))
             | (Type::String, Value::String(_)) => Ok(()),
             (Type::Integer, Value::Number(n)) if n.is_i64() || n.is_u64() => Ok(()),
-            _ => Err(ValidationError::new(format!(
-                "{instance} is not of type '{self}'"
-            ))),
+            _ => Err(ValidationError::new(
+                format!("{instance} is not of type '{self}'"),
+                path.into_iter(),
+            )),
         }
     }
 }

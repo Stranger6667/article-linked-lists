@@ -20,11 +20,13 @@ impl Properties {
 }
 
 impl Node for Properties {
-    fn validate(&self, instance: &Value) -> Result<(), ValidationError> {
+    fn validate(&self, instance: &Value, path: Vec<&str>) -> Result<(), ValidationError> {
         if let Value::Object(object) = instance {
             for (key, value) in &self.properties {
-                if let Some(instance) = object.get(key) {
-                    value.validate(instance)?;
+                if let Some((key, instance)) = object.get_key_value(key) {
+                    let mut path = path.clone();
+                    path.push(key);
+                    value.validate(instance, path)?;
                 }
             }
         }

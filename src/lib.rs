@@ -116,7 +116,7 @@ impl Validator {
     ///
     /// Returns `ValidationError` if the input instance is not valid under the given validator.
     pub fn validate(&self, instance: &Value) -> Result<(), ValidationError> {
-        self.node.validate(instance)
+        self.node.validate(instance, vec![])
     }
 }
 
@@ -154,6 +154,10 @@ mod tests {
           }
         });
         let error = validate(&instance, &json!({})).expect_err("Should fail");
-        assert_eq!(error.to_string(), "1 is not of type 'string'");
+        assert_eq!(
+            error.to_string(),
+            "1 is not of type 'string' at /inner/inner/inner/inner/another"
+        );
+        assert_eq!(instance.pointer(&error.location_pointer()), Some(&json!(1)));
     }
 }

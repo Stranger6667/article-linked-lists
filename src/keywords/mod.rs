@@ -9,5 +9,5 @@ pub(crate) use properties::Properties;
 pub(crate) use type_::Type;
 
 pub(crate) trait Node {
-    fn validate(&self, instance: &Value) -> Result<(), ValidationError>;
+    fn validate(&self, instance: &Value, path: Vec<&str>) -> Result<(), ValidationError>;
 }

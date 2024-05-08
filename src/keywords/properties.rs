@@ -1,3 +1,4 @@
+use imbl::Vector;
 use serde_json::Value;
 
 use crate::{Node, ValidationError};
@@ -20,12 +21,12 @@ impl Properties {
 }
 
 impl Node for Properties {
-    fn validate(&self, instance: &Value, path: Vec<&str>) -> Result<(), ValidationError> {
+    fn validate(&self, instance: &Value, path: Vector<&str>) -> Result<(), ValidationError> {
         if let Value::Object(object) = instance {
             for (key, value) in &self.properties {
                 if let Some((key, instance)) = object.get_key_value(key) {
                     let mut path = path.clone();
-                    path.push(key);
+                    path.push_back(key);
                     value.validate(instance, path)?;
                 }
             }

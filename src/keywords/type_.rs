@@ -1,5 +1,6 @@
 use core::fmt;
 
+use imbl::Vector;
 use serde_json::Value;
 
 use crate::ValidationError;
@@ -25,7 +26,7 @@ impl Type {
 }
 
 impl Node for Type {
-    fn validate(&self, instance: &Value, path: Vec<&str>) -> Result<(), ValidationError> {
+    fn validate(&self, instance: &Value, path: Vector<&str>) -> Result<(), ValidationError> {
         match (self, instance) {
             (Type::Array, Value::Array(_))
             | (Type::Null, Value::Null)

@@ -30,6 +30,7 @@
 
 use core::fmt;
 
+use imbl::Vector;
 use serde_json::Value;
 
 mod error;
@@ -116,7 +117,7 @@ impl Validator {
     ///
     /// Returns `ValidationError` if the input instance is not valid under the given validator.
     pub fn validate(&self, instance: &Value) -> Result<(), ValidationError> {
-        self.node.validate(instance, vec![])
+        self.node.validate(instance, Vector::new())
     }
 }
 

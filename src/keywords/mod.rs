@@ -1,3 +1,4 @@
+use imbl::Vector;
 use serde_json::Value;
 
 use crate::ValidationError;
@@ -9,5 +10,5 @@ pub(crate) use properties::Properties;
 pub(crate) use type_::Type;
 
 pub(crate) trait Node {
-    fn validate(&self, instance: &Value, path: Vec<&str>) -> Result<(), ValidationError>;
+    fn validate(&self, instance: &Value, path: Vector<&str>) -> Result<(), ValidationError>;
 }

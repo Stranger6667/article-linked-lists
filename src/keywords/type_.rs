@@ -40,7 +40,7 @@ impl Node for Type {
             (Type::Integer, Value::Number(n)) if n.is_i64() || n.is_u64() => Ok(()),
             _ => Err(ValidationError::new(
                 format!("{instance} is not of type '{self}'"),
-                path.to_vec().into_iter(),
+                path.to_vec(),
             )),
         }
     }

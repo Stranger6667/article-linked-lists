@@ -24,13 +24,10 @@ pub struct ValidationError {
 
 impl ValidationError {
     /// Create new validation error.
-    pub fn new(
-        message: impl Into<String>,
-        location: impl Iterator<Item = impl Into<String>>,
-    ) -> Self {
+    pub fn new(message: impl Into<String>, location: Vec<String>) -> Self {
         Self {
             message: message.into(),
-            location: location.map(Into::into).collect(),
+            location,
         }
     }
     /// JSON Pointer to the location of the error.

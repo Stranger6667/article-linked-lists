@@ -20,7 +20,7 @@ impl<'a, 'b> JsonPointerNode<'a, 'b> {
         }
     }
     /// Convert the JSON pointer node to a vector of path segments.
-    pub(crate) fn to_vec(&'a self) -> Vec<&'a str> {
+    pub(crate) fn to_vec(&self) -> Vec<String> {
         // Walk the linked list to calculate the capacity
         let mut capacity = 0;
         let mut head = self;
@@ -32,12 +32,12 @@ impl<'a, 'b> JsonPointerNode<'a, 'b> {
         let mut buffer = Vec::with_capacity(capacity);
         let mut head = self;
         if let Some(segment) = &head.segment {
-            buffer.push(*segment);
+            buffer.push((*segment).to_string());
         }
         while let Some(next) = head.parent {
             head = next;
             if let Some(segment) = &head.segment {
-                buffer.push(*segment);
+                buffer.push((*segment).to_string());
             }
         }
         // Reverse the buffer to get the segments in the correct order

@@ -9,18 +9,32 @@ use serde_json::json;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     jsonschema::validate(
-      &json!({"another": 42}),
+      // JSON instance to validate
+      &json!({
+          "name": "John",
+          "location": {
+               "country": 404
+          }
+      }),
+      // JSON schema
       &json!({
           "properties": {
-              "another": {
+              "name": {
                   "type": "string"
+              },
+              "location": {
+                  "properties": {
+                      "country": {
+                          "type": "string"
+                      }
+                  }
               }
           }
       }),
     ).expect_err("Should fail");
     Ok(())
 }
-// 42 is not of type 'string'
+// 404 is not of type ‘string’ at /location/country
 ```
 
 **NOTE**: To keep the article focused on path tracking, this library uses a single hardcoded schema.

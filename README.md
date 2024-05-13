@@ -1,6 +1,6 @@
-# Practical use case for linked lists
+# Blazingly Fast Linked Lists
 
-This repository contains a toy validation library built in the `Practical use case for linked lists` article.
+This repository contains a toy validation library built in the [Blazingly Fast Linked Lists](https://dygalo.dev/blog/blazingly-fast-linked-lists/) article.
 
 ## Usage
 

@@ -40,6 +40,15 @@ impl ValidationError {
         }
         pointer
     }
+    #[inline]
+    pub(crate) fn push_segment(&mut self, segment: impl Into<String>) {
+        self.location.push(segment.into());
+    }
+    #[inline]
+    pub(crate) fn finish(mut self) -> ValidationError {
+        self.location.reverse();
+        self
+    }
 }
 
 impl fmt::Display for ValidationError {

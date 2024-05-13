@@ -45,13 +45,15 @@ Run benchmarks:
 cargo bench
 ```
 
-Build flamegraph for the "valid/10 levels" benchmark:
+Build flame graph for the "valid/10 levels" benchmark:
 
 ```sh
 cargo flamegraph --bench jsonschema -o valid-10.svg -- --bench "valid/10 levels"
 ```
 
 ## Benchmarks
+
+![performance-comparison](https://github.com/Stranger6667/article-linked-lists/assets/1236561/b714d431-cb4b-4c3b-9448-d0acac1c29d9)
 
 Here is the performance progression described in the article:
 
